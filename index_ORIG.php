@@ -66,31 +66,28 @@
             // chartIt()
 
             async function chartIt() {
-
-                // This is a hack to re-render the chart (throws error in console)
-                $('#chart').remove(); 
-                $('#graph-container').append('<canvas id="chart"><canvas>');
                 
                 const CSVdata = await getData();
+                
+                const data = {
+                    labels: CSVdata.xValues,
+                    datasets: [{
+                        label: 'ShoofDirect Sales',
+                        data: CSVdata.yValues,
+                        backgroundColor: ['rgba(0, 82, 147, 1)'],
+                        borderColor: ['rgba(0, 82, 147, 1)'],
+                        fill: true,
+                        borderWidth: 0,
+                        radius: 4,
+                        hoverRadius: 8,
+                        borderJoinStyle: 'round',
+                        tension: .4
+                    }]
+                };
 
-                const ctx = document.getElementById('chart').getContext('2d');
-                const chart = new Chart(ctx, {
+                const config = {
                     type: 'bar',
-                    data: {
-                        labels: CSVdata.xValues,
-                        datasets: [{
-                            label: 'ShoofDirect Sales',
-                            data: CSVdata.yValues,
-                            backgroundColor: ['rgba(0, 82, 147, 1)'],
-                            borderColor: ['rgba(0, 82, 147, 1)'],
-                            fill: true,
-                            borderWidth: 0,
-                            radius: 4,
-                            hoverRadius: 8,
-                            borderJoinStyle: 'round',
-                            //tension: .4
-                        }]
-                    },
+                    data,
                     options: {
                         scales: {
                             y: {
@@ -106,8 +103,34 @@
                             padding: 20
                         }
                     }
+                };
 
-                });
+                
+                // This is a hack to rerender the chart (throws error in console)
+                $('#chart').remove(); 
+                $('#graph-container').append('<canvas id="chart"><canvas>');
+
+
+
+                let chart = new Chart(
+                    document.getElementById('chart').getContext('2d'),
+                    config
+                );
+
+                function destroy() {
+                    chart.destroy();
+                }
+
+                //destroy();
+
+                function render() {
+                    chart = new Chart(
+                        document.getElementById('chart').getContext('2d'),
+                        config
+                    );
+                }
+
+                //render();
 
                             
             } // ENDS chartIT
@@ -121,7 +144,7 @@
 
                 const xValues = [];
                 const yValues = [];
-
+                
 
                 //const response = await fetch('./csv-files/sales-aug.csv');       
                 const response = await fetch('./csv-files/' + CSVmonth);                
@@ -139,7 +162,7 @@
                 });
 
                 return {xValues, yValues};
-
+                
             }
 
         </script>
