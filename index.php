@@ -44,6 +44,23 @@
                 ?>
 
             </div>
+
+            <div class="col-lg-2 col-md-3">
+                
+                <?php 
+                    //Get all .csv files in the csv-files directory
+                    $filey = glob("./csv-files-year/*.csv");
+
+                    echo '<select onchange="chartIt()" name="year" id="year" class="form-control">';
+                        echo '<option value="">SELECT YEAR</option>';
+                        foreach($filey as $file):
+                            echo '<option value="'.str_replace("./csv-files-year/","",$file).'">'.str_replace("./csv-files-year/","",$file).'</option>';
+                        endforeach;
+                    echo '</select>';
+
+                ?>
+
+            </div>
         </div>
     </div>
 
@@ -117,14 +134,22 @@
 
             async function getData(){
 
-                const CSVmonth = document.getElementById("month").value;
+                let CSVmonth = '';
 
+                if(document.getElementById("month").value){
+                    CSVmonth = 'csv-files/' + document.getElementById("month").value;
+                } else {
+                    CSVmonth = 'csv-files-year/' + document.getElementById("year").value;
+                }
+
+                //const CSVmonth = document.getElementById("month").value;
+                
                 const xValues = [];
                 const yValues = [];
 
 
                 //const response = await fetch('./csv-files/sales-aug.csv');       
-                const response = await fetch('./csv-files/' + CSVmonth);                
+                const response = await fetch('./' + CSVmonth);                
                 const rawData = await response.text();
 
                 const data = CSVToArray(rawData).splice(1); // Parse CSV with parser.js and remove first header row
