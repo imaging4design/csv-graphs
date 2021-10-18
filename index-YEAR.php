@@ -130,12 +130,28 @@
                 const data = CSVToArray(rawData).splice(1); // Parse CSV with parser.js and remove first header row
                 data.splice(-2) // remove totals & empty row at end of file
 
+                console.log(data);
+
                 data.forEach(item => {
                     const year = Date.parse(item[0])/1000;
-                    xValues.push(moment.unix(year).format("ddd/DD"));
+                    //const testYear = item[0];
+
+                    const x = item[0];
+                    const xmonth = +x.split('/')[0];
+                    const xyear = +x.split('/')[1];
+
+                    let xdate =  Date.parse(xmonth+'-1-'+xyear);
+
+                    xdate = moment(xdate).format("MMM-YYYY");
+
+                    //xdate = moment(xdate, 'DD.MM.YYYY HH:mm:ss');
+                    console.log(xdate);
+
+                    xValues.push(xdate);
+                    //xValues.push(moment.unix(year).format("ddd/DD"));
                     const order = item[3].replace('$', '');
                     yValues.push(parseFloat(order.replace(/,/g,'')));
-                    console.log('Date: ' + year, 'No. Orders: ' + order);
+                    //console.log('TestDate: ' + xdate, 'Date: ' + year, 'No. Orders: ' + order);
                 });
 
                 return {xValues, yValues};
