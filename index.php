@@ -16,7 +16,7 @@
 
     <style>
         #graph-container {
-            padding: 10px;
+            padding: 11px;
         }
     </style>
     <body>
