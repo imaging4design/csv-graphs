@@ -1,0 +1,43 @@
+body {
+    font-family: "Roboto Condensed";
+    color: #333333;
+}
+h1 {
+    font-size: 26px;
+}
+.wrapper {
+    display: flex; /* establish flex container */
+    flex-direction: row; /* make main axis horizontal (default value) */
+    justify-content: center; /* center items horizontally, in this case */
+    align-items: center; /* center items vertically, in this case */
+    height: 100vh; /* for demo purposes */
+    background: rgba(0,82,147,1);
+    .selection {
+        width: 300px;
+        margin: 5px;
+        text-align: center;
+    }
+}
+
+.graph-wrapper {
+    height: 100vh; /* for demo purposes */
+    background: rgb(1, 47, 85);
+    background: #FFFFFF;
+    padding: 20px 0;
+}
+
+a.button {
+    font-size: 20px;
+    color: rgba(0,82,147,1);
+    text-transform: uppercase;
+    text-decoration: none;
+    min-width: 200px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    background: #eee;
+    display: inline-block;
+}
+
+#graph-container {
+    padding: 11px;
+}

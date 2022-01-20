@@ -1,0 +1,62 @@
+body {
+  font-family: "Roboto Condensed";
+  color: #333333;
+}
+
+h1 {
+  font-size: 26px;
+}
+
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  /* establish flex container */
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  /* make main axis horizontal (default value) */
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  /* center items horizontally, in this case */
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  /* center items vertically, in this case */
+  height: 100vh;
+  /* for demo purposes */
+  background: #005293;
+}
+
+.wrapper .selection {
+  width: 300px;
+  margin: 5px;
+  text-align: center;
+}
+
+.graph-wrapper {
+  height: 100vh;
+  /* for demo purposes */
+  background: #012f55;
+  background: #FFFFFF;
+  padding: 20px 0;
+}
+
+a.button {
+  font-size: 20px;
+  color: #005293;
+  text-transform: uppercase;
+  text-decoration: none;
+  min-width: 200px;
+  padding: 10px 20px;
+  border-radius: 3px;
+  background: #eee;
+  display: inline-block;
+}
+
+#graph-container {
+  padding: 11px;
+}
+/*# sourceMappingURL=styles.css.map */
