@@ -79,7 +79,6 @@
                         legend: {
                             labels: {
                                 color: "#333333",  // not 'fontColor:' anymore
-                                // fontSize: 18  // not 'fontSize:' anymore
                                 font: {
                                     size: 18 // 'size' now within object 'font {}'
                                 }
@@ -120,7 +119,7 @@
             };
 
 
-            // This is a hack to rerender the chart (throws error in console)
+            // This is a hack to re-render the chart
             $('#chart').remove();
             $('#graph-container').append('<canvas id="chart"><canvas>');
 
@@ -135,8 +134,6 @@
                 chart.destroy();
             }
 
-            //destroy();
-
             function render() {
                 chart = new Chart(
                     document.getElementById('chart').getContext('2d'),
@@ -144,10 +141,8 @@
                 );
             }
 
-            //render();
 
-
-        } // ENDS chartIT
+        } // ENDS chartIt()
 
 
 
@@ -171,6 +166,7 @@
             const yValues = [];
             const monthLabel = ' - (' + CSVmonth.substring(3, CSVmonth.length-4).toLocaleUpperCase() + ')';
 
+
             const response = await fetch('./csv-2021-month/' + CSVmonth);
             const rawData = await response.text();
 
@@ -185,7 +181,7 @@
 
                 yValues.push(parseFloat(order.replace(/,/g, '')) - parseFloat(shipping.replace(/,/g, ''))); // Sales Amount - Shipping Amount
                 //console.log('Date: ' + year, 'No. Orders: ' + order);
-                console.log(shipping);
+                //console.log(shipping);
             });
 
             // Now pass values through to chartIt() function
@@ -197,13 +193,8 @@
 
         }
 
-        
-        // (async() => {
-        // console.log('1')
-        // await chartIt();
-        // console.log('2')
-        // })()
-
+    
+        // Invoke chartIt()
         chartIt();
 
         
