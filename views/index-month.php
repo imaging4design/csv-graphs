@@ -166,7 +166,6 @@
             const yValues = [];
             const monthLabel = ' - (' + CSVmonth.substring(3, CSVmonth.length-4).toLocaleUpperCase() + ')';
 
-
             const response = await fetch('./csv-2021-month/' + CSVmonth);
             const rawData = await response.text();
 
@@ -176,12 +175,10 @@
             data.forEach(item => {
                 const year = Date.parse(item[0]) / 1000;
                 xValues.push(moment.unix(year).format("ddd/DD"));
+                
                 const order = item[3].replace('$', '');
                 const shipping = item[7].replace('$', '');
-
                 yValues.push(parseFloat(order.replace(/,/g, '')) - parseFloat(shipping.replace(/,/g, ''))); // Sales Amount - Shipping Amount
-                //console.log('Date: ' + year, 'No. Orders: ' + order);
-                //console.log(shipping);
             });
 
             // Now pass values through to chartIt() function
